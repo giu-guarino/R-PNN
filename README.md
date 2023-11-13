@@ -8,7 +8,7 @@
 
 [Band-wise Hyperspectral Image Pansharpening using CNN Model Propagation](link 1) ([ArXiv](link 2)) 
 
-Brief Description
+is a Deep Learning method that use a simple CNN model propagation strategy for Hyperspectral Pansharpening. Starting from an initial weights configuration, each band is pansharpened refining the model tuned on the preceding one. In this way, R-PNN is able to work with hyperspectral images with an arbitrary number of bands. The proposed method has been tested on real hyperspectral images (PRISMA Dataset) and compared with several Pansharpening methods, both model-based and Deep-Learning.
 
 ## Cite R-PNN
 
@@ -80,8 +80,8 @@ the operation is not guaranteed with other configurations.
 
 The easiest way for testing this algorithm is to create a `.mat` file. It must contain:
 
-*   `I_MS_LR`: Original Hyper-Spectral Stack in channel-last configuration (Dimensions: H x W x B);
-*   `I_MS`: Interpolated version of Original Hyper-Spectral Stack in channel-last configuration (Dimensions: HR x WR x B);
+*   `I_MS_LR`: Original Hyperspectral Stack in channel-last configuration (Dimensions: H x W x B);
+*   `I_MS`: Upsampled version of original Hyperspectral Stack in channel-last configuration (Dimensions: HR x WR x B);
 *   `I_PAN`: Original Panchromatic band, without the third dimension (Dimensions: HR x WR).
 
 where R is the ratio of the sensor.
@@ -90,9 +90,11 @@ Please refer to `--help` for more details.
 
 ### Testing
 
-The easiest command to use the algorithm on full resolution data:
+This project provide a set of weights obtained from a pre-training procedure described in the paper. You can directly start from this configuration using the command:
 
-    python test.py -i path/to/file.mat -s sensor_name
+    python test.py -i path/to/file.mat
+    
+where `path/to/file.mat` can be any dataset (with any number of bands) organized as described before.
 
 Several options are possible. Please refer to the parser help for more details:
 
@@ -100,13 +102,7 @@ Several options are possible. Please refer to the parser help for more details:
 
 ### Training
 
-This project provide a set of weights obtained from a previos training. 
-
-If you want to train this network by yourself, you can do it providing in input the path of a folder that contains two subfolders:
-
-*   Dataset
-*       Training
-*       Validation
+If you want to train this network by yourself, you can do it providing in input the path of a `Dataset` folder that has to contain two subfolders: `Training` and `Validation`.
 
 
 ## Dataset
