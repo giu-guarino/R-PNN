@@ -16,7 +16,7 @@ Bibtex
 
 *   Matteo Ciotola (matteo.ciotola@unina.it);
 
-*   Gemine Vivone   ();
+*   Gemine Vivone;
 
 *   Giuseppe Scarpa  (giuseppe.scarpa@uniparthenope.it).
 
@@ -27,7 +27,7 @@ All rights reserved.
 This software should be used, reproduced and modified only for informational and nonprofit purposes.
 
 By downloading and/or using any of these files, you implicitly agree to all the
-terms of the license, as specified in the document [`LICENSE`](https://github.com/giu-guarino/R-PNN/LICENSE.txt)
+terms of the license, as specified in the document [`LICENSE`](https://github.com/giu-guarino/R-PNN/blob/main/LICENSE.txt)
 (included in this package)
 
 ## Prerequisites
