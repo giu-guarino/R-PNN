@@ -83,7 +83,7 @@ The easiest way for testing this algorithm is to create a `.mat` file. It must c
 *   `I_MS_LR`: Original Hyperspectral Stack in channel-last configuration (Dimensions: H x W x B);
 *   `I_MS`: Upsampled version of original Hyperspectral Stack in channel-last configuration (Dimensions: HR x WR x B);
 *   `I_PAN`: Original Panchromatic band, without the third dimension (Dimensions: HR x WR).
-*   `Wavelengths`: An array of wavelengths of each band (Dimensions: 1 x B)
+*   `Wavelengths`: Array of wavelengths (Dimensions: B x 1)
 
 where R is the ratio of the sensor.
 
