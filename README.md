@@ -1,8 +1,6 @@
 # Band-wise Hyperspectral Image Pansharpening using CNN Model Propagation
 
-[Band-wise Hyperspectral Image Pansharpening using CNN Model Propagation](link 1) ([ArXiv](link 2)) 
-
-is a Deep Learning method that use a simple CNN model propagation strategy for Hyperspectral Pansharpening. Starting from an initial weights configuration, each band is pansharpened refining the model tuned on the preceding one. In this way, R-PNN is able to work with hyperspectral images with an arbitrary number of bands. The proposed method has been tested on real hyperspectral images (PRISMA Dataset) and compared with several Pansharpening methods, both model-based and Deep-Learning.
+[Band-wise Hyperspectral Image Pansharpening using CNN Model Propagation](link_to_add)  [ArXiv](https://www.google.com/url?q=http://arxiv.org/abs/2311.06510&source=gmail&ust=1700026852089000&usg=AOvVaw0bA5hS9pYGvnMPpmkPF2LT) is a Deep Learning method that use a simple CNN model propagation strategy for Hyperspectral Pansharpening. Starting from an initial weights configuration, each band is pansharpened refining the model tuned on the preceding one. In this way, R-PNN is able to work with hyperspectral images with an arbitrary number of bands. The proposed method has been tested on real hyperspectral images (PRISMA Dataset) and compared with several Pansharpening methods, both model-based and Deep-Learning.
 
 ## Cite R-PNN
 
