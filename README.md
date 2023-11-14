@@ -6,7 +6,16 @@
 
 If you use R-PNN in your research, please use the following BibTeX entry.
 
-*Bibtex to add*
+```
+@misc{guarino2023bandwise,
+      title={Band-wise Hyperspectral Image Pansharpening using CNN Model Propagation}, 
+      author={Giuseppe Guarino and Matteo Ciotola and Gemine Vivone and Giuseppe Scarpa},
+      year={2023},
+      eprint={2311.06510},
+      archivePrefix={arXiv},
+      primaryClass={eess.IV}
+}
+```
 
 ## Team members
 
