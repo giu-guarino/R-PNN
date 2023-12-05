@@ -1,20 +1,21 @@
 # Band-wise Hyperspectral Image Pansharpening using CNN Model Propagation
 
-[Band-wise Hyperspectral Image Pansharpening using CNN Model Propagation](link to add) (  [ArXiv](https://www.google.com/url?q=http://arxiv.org/abs/2311.06510&source=gmail&ust=1700026852089000&usg=AOvVaw0bA5hS9pYGvnMPpmkPF2LT) ) introduces **Rolling Pansharpening Neural Network** (R-PNN), a Deep Learning method that use a simple CNN model propagation strategy for Hyperspectral Pansharpening. Starting from an initial weights configuration, each band is pansharpened refining the model tuned on the preceding one. In this way, R-PNN is able to work with hyperspectral images with an arbitrary number of bands. The proposed method has been tested on real hyperspectral images (PRISMA Dataset) and compared with several Pansharpening methods, both model-based and Deep-Learning.
+[Band-wise Hyperspectral Image Pansharpening using CNN Model Propagation](https://ieeexplore.ieee.org/document/10341305) (  [ArXiv](https://www.google.com/url?q=http://arxiv.org/abs/2311.06510&source=gmail&ust=1700026852089000&usg=AOvVaw0bA5hS9pYGvnMPpmkPF2LT) ) introduces **Rolling Pansharpening Neural Network** (R-PNN), a Deep Learning method that use a simple CNN model propagation strategy for Hyperspectral Pansharpening. Starting from an initial weights configuration, each band is pansharpened refining the model tuned on the preceding one. In this way, R-PNN is able to work with hyperspectral images with an arbitrary number of bands. The proposed method has been tested on real hyperspectral images (PRISMA Dataset), both Full and Reduced resoution and then compared with several Pansharpening methods, both model-based and Deep-Learning.
 
 ## Cite R-PNN
 
 If you use R-PNN in your research, please use the following BibTeX entry.
 
 ```
-@misc{guarino2023bandwise,
-      title={Band-wise Hyperspectral Image Pansharpening using CNN Model Propagation}, 
-      author={Giuseppe Guarino and Matteo Ciotola and Gemine Vivone and Giuseppe Scarpa},
-      year={2023},
-      eprint={2311.06510},
-      archivePrefix={arXiv},
-      primaryClass={eess.IV}
-}
+@ARTICLE{10341305,
+  author={Guarino, Giuseppe and Ciotola, Matteo and Vivone, Gemine and Scarpa, Giuseppe},
+  journal={IEEE Transactions on Geoscience and Remote Sensing}, 
+  title={Band-wise Hyperspectral Image Pansharpening using CNN Model Propagation}, 
+  year={2023},
+  volume={},
+  number={},
+  pages={1-1},
+  doi={10.1109/TGRS.2023.3339337}}
 ```
 
 ## Team members
