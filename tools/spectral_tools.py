@@ -108,10 +108,10 @@ def fspecial_gauss(size, sigma):
         h /= sumh
     return h
 
-
 def nyquist_filter_generator(nyquist_freq, ratio, kernel_size):
     """
         Compute the estimeted MTF filter kernels.
+
         Parameters
         ----------
         nyquist_freq : Numpy Array or List
@@ -120,33 +120,32 @@ def nyquist_filter_generator(nyquist_freq, ratio, kernel_size):
             The resolution scale which elapses between MS and PAN.
         kernel_size : int
             The size of the kernel (Only squared kernels have been implemented).
+
         Return
         ------
         kernel : Numpy array
             The filter based on Modulation Transfer Function.
+
     """
+
     assert isinstance(nyquist_freq, (np.ndarray, list)), 'Error: GNyq must be a list or a ndarray'
+
     if isinstance(nyquist_freq, list):
         nyquist_freq = np.asarray(nyquist_freq)
-        nyquist_freq = np.reshape(nyquist_freq, (1,nyquist_freq.shape[0]))
 
-    nbands = nyquist_freq.shape[1]
+    nbands = nyquist_freq.shape[0]
 
     kernel = np.zeros((kernel_size, kernel_size, nbands))  # generic kerenel (for normalization purpose)
+
     fcut = 1 / np.double(ratio)
 
     for j in range(nbands):
-        alpha = np.sqrt(((kernel_size - 1) * (fcut / 2)) ** 2 / (-2 * np.log(nyquist_freq[0, j])))
+        alpha = np.sqrt(((kernel_size - 1) * (fcut / 2)) ** 2 / (-2 * np.log(nyquist_freq[j])))
         H = fspecial_gauss((kernel_size, kernel_size), alpha)
         Hd = H / np.max(H)
         h = np.kaiser(kernel_size, 0.5)
-        h = np.real(fir_filter_wind(Hd, h))
-        if ratio != 6: # TO DO: Delete for HyperSpectral
-            h = np.clip(h, a_min=0, a_max=np.max(h))
-            h = h / np.sum(h)
-        else:
-            h = np.real(h)
-        kernel[:, :, j] = h
+
+        kernel[:, :, j] = np.real(fir_filter_wind(Hd, h))
 
     return kernel
 
@@ -186,7 +185,6 @@ def gen_mtf(ratio, sensor='none', kernel_size=41, nbands=3):
     h = nyquist_filter_generator(GNyq, ratio, kernel_size)
 
     return h
-
 
 
 def mtf(img, sensor, ratio, mode='replicate'):
