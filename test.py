@@ -62,7 +62,6 @@ def test_r_pnn(args):
 
     net_scope = config['net_scope']
     pad = nn.ReflectionPad2d(net_scope)
-    pan = pad(pan)
 
     # Torch configuration
     net = R_PNN_model()
@@ -71,6 +70,7 @@ def test_r_pnn(args):
 
     criterion_spec = SpectralLoss(gen_mtf(ratio, sensor, kernel_size=61, nbands=1), ratio, device).to(device)
     criterion_struct = StructuralLoss(ratio).to(device)
+
     optim = torch.optim.Adam(net.parameters(), lr=learning_rate)
 
     history_loss_spec = []
@@ -85,10 +85,10 @@ def test_r_pnn(args):
         band = ms[:, band_number:band_number + 1, :, :].to(device)
         band_lr = ms_lr[:, band_number:band_number + 1, :, :].to(device)
 
-        band = pad(band)
-
         # Aux data generation
         inp = torch.cat([band, pan], dim=1)
+        inp = pad(inp)
+
         threshold = local_corr_mask(inp, ratio, sensor, device, config['semi_width'])
 
         if wl[band_number] > 700:
@@ -98,6 +98,7 @@ def test_r_pnn(args):
             ft_epochs = config['first_iter']
         else:
             ft_epochs = int(min(((wl[band_number].item() - wl[band_number - 1].item()) // 10 + 1) * config['epoch_nm'], config['sat_val']))
+
         min_loss = torch.inf
         print('Band {} / {}'.format(band_number + 1, ms.shape[1]))
         pbar = tqdm(range(ft_epochs))
@@ -113,7 +114,7 @@ def test_r_pnn(args):
 
             loss_spec = criterion_spec(outputs, band_lr)
             loss_struct, loss_struct_without_threshold = criterion_struct(outputs,
-                                                                          pan[:, :, net_scope:-net_scope, net_scope:-net_scope],
+                                                                          pan,
                                                                           threshold[:, :, net_scope:-net_scope, net_scope:-net_scope])
 
             loss = loss_spec + alpha * loss_struct
@@ -135,12 +136,17 @@ def test_r_pnn(args):
 
             pbar.set_postfix(
                 {'Spec Loss': running_loss_spec, 'Struct Loss': running_loss_struct})
+
         net.load_state_dict(torch.load(os.path.join('temp', 'R-PNN_best_model.tar')))
+
+        net.eval()
         fused.append(net(inp).detach().cpu())
 
     fused = torch.cat(fused, 1)
-
     fused = denormalize(np.moveaxis(torch.squeeze(fused, 0).numpy(), 0, -1))
+    fused = np.round(fused)
+    fused = np.clip(fused, 0, 2 ** 16)
+    fused = fused.astype(np.uint16)
 
     if not os.path.exists(out_dir):
         os.makedirs(out_dir)
